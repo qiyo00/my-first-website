@@ -4,9 +4,11 @@ body {
     font-optical-sizing: auto;
     font-weight: <weight>;
     font-style: normal;
+    color: rgb(180, 180, 180);
 }
 
 h1 {
     color: rgb(176, 33, 33);
     font-size: 60px;
 }
+a {color:rgb(176, 33, 33)}
