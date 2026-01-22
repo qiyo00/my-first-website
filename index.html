@@ -14,13 +14,102 @@
 </head>
 
 <body>
-    <p>Hello, this is Qiyo's first website</p>
-    <h1>Main Heading</h1>
-    <h2>Subheading</h2>
-    <h3>Quote</h3>
-    <img src="images/Sketch_0114.JPG" alt="Home_page_sketch" height="400">
-    <p>ファイアパンチになって。</p>
-    <a href="https://sites.google.com/view/qingyue-guo/portfolio">Go to my portfolio website</a>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>
+                    <a href="index.html">My DevDiaries</a>
+                </h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/labs.html">Labs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Hello, this is <b>Qiyo</b>'s first website.</h2>
+                <p><i>ファイアパンチになって。</i></p>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="gallery">
+                <h2>My Entries</h2>
+
+                <div class="gallery-grid">
+
+                    <div class="gallery-item">
+                        <a href="pages/labs.html">
+                            <img src="images/placeholder.png"
+                                alt="Lab 2 project screenshot showing navigation and layout">
+                            <div class="gallery-overlay">
+                                <h3>Labs</h3>
+                                <p>15/Jan/2026</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="images/placeholder.png" alt="Coming soon">
+                        <div class="gallery-overlay">
+                            <h3>Coming Soon</h3>
+                            <p>Coming Soon</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="images/placeholder.png" alt="Coming soon">
+                        <div class="gallery-overlay">
+                            <h3>Coming Soon</h3>
+                            <p>Coming Soon</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="images/placeholder.png" alt="Coming soon">
+                        <div class="gallery-overlay">
+                            <h3>Coming Soon</h3>
+                            <p>Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>My DevDiaries</h3>
+                <p>Documenting my journey in web development</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pages/about.html">About</a></li>
+                    <li><a href="pages/labs.html">Labs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: qingyue.guo@mail.utoronto.ca</p>
+                <p>Website: <a href="https://sites.google.com/view/qingyue-guo/portfolio">Go to my portfolio website</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 My DevDiaries by Qiyo. All rights reserved.</p>
+        </div>
+    </footer>
+
 </body>
 
 </html>

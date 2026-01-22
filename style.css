@@ -1,34 +1,742 @@
-body {
-    /* --- Layout Properties for Centering --- */
-    display: grid;
-    place-items: center;
-    /* Centers content horizontally and vertically */
-    min-height: 100vh;
-    /* Ensures the body takes up the full screen height */
-    margin: 0;
-    /* Removes default browser margins */
-    background-color: #141315;
-    font-family: "JetBrains Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: <400>;
-    font-style: normal;
-    color: #888888;
+/* =========================================
+   1. CSS Variables (颜色与全局设置)
+   -颜色汇总，方便以后统一修改
+   ========================================= */
+:root {
+    --text-emphasis-color: #575c82;
+    /*luye's purple*/
+    --bg-color: #dee1ef;
+    /* 页面背景色 */
+    --text-color: #38363b;
+    /* 正文文字颜色 */
+    --nav-bg-color: #38363b;
+    /* 导航栏背景色 */
+    --nav-text-color: #efe8de;
+    /* 导航栏文字颜色 */
+    --font-main: "JetBrains Mono", monospace;
 }
 
-h1 {
-    color: #e0e0e0;
-    font-size: 60px;
+/* =========================================
+   2. Reset (重置默认样式)
+   “*” 代表“所有元素”
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   3. Base Styles (全局基础样式)
+   ========================================= */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+
+    /* 使用 Flex column 布局，让 header 和 main 从上到下排列 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   4. Layout Containers (布局容器)
+   ========================================= */
+header {
+    background: linear-gradient(90deg, #efe8de 0%, #575c82 100%);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 改了之后的：1. 修改 main：让它变成全宽，去除束缚 */
+main {
+    flex-grow: 1;
+    width: 100%;
+    padding: 0;
+    /* 🔥 关键：去掉内边距，Hero 才能贴边 */
+    max-width: none;
+    /* 🔥 关键：去掉最大宽度，Hero 才能全屏 */
+    margin: 0;
+    display: block;
+    /* 建议改回 block，Grid 居中会干扰全宽布局 */
+}
+
+/* 2. 新增一个类：专门用来限制除了 Hero 以外的内容 */
+.content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    /* 原来的限制移到这里 */
+    margin: 0 auto;
+    /* 居中 */
+    padding: 2rem;
+    /* 原来的内边距移到这里 */
+}
+
+/* 3. Hero 保持全宽 */
+.hero {
+    width: 100%;
+    /* 其他样式保持不变... */
+}
+
+@media (max-width: 768px) {
+    content-wrapper {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* =========================================
+   5. Components
+   ========================================= */
+/* ------------------------
+Navigation Bar 
+-------------------------- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    /* 限制内容宽度，不让在大屏幕上太散 */
+    margin: 0 auto;
+    /* 导航内容居中 */
+}
+
+.logo h1 {
+    color: #575c82;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* 让 logo 里的链接继承 h1 的颜色，并且去掉下划线 */
+.logo h1 a {
+    text-decoration: none;
+    /* 去掉下划线 */
+    color: inherit;
+    /* 继承 h1 的颜色（就是你之前设定的颜色） */
+    cursor: pointer;
+    /* 鼠标放上去变小手 */
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.logo h1 a:hover {
+/* 稍微把字往左上角提一点，制造悬浮感 */
+    transform: translate(-2px, -2px);
+    
+    /* 关键：不使用模糊(0px)，而是使用硬阴影 */
+    /* 第一层阴影：右下角的紫色 */
+    /* 第二层阴影：左上角的粉色 */
+    text-shadow: 
+        3px 3px 0px #575c82,  
+        -2px -2px 0px #fff; 
+        
+    /* 保持文字颜色深色，确保清晰度 */
+    color: #3b3a36;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--nav-text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* 鼠标悬停效果 */
+.nav-links a:hover {
+    border-color: var(--nav-text-color);
+    color: #f5beb2;
+    border-bottom: 3px solid #f5beb2;
+}
+
+/*current page indicator*/
+.nav-links a.active {
+    color: #f5e1d6;
+    border-bottom: 3px solid #f5e1d6;
+    font-weight: 600;
+}
+
+/* On smaller screens, reduce gap */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* ---------------------
+Hero Section 
+-----------------------*/
+.hero {
+    width: 100%;
+    /* 强制占满宽度 */
+    height: 60vh;
+    /* 占据屏幕高度的 80% (你可以改为 100vh 占满全屏) */
+
+    /* 这里换成你的图片路径 */
+    background-image: url('images/fire_punch.png');
+
+    /* 核心代码：让图片不重复，并自动覆盖 */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    /* 加一层半透明黑膜，防止图片太花看不清字 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/fire_punch.png');
+
+    /* 让文字在图片正中间 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    /* 文字颜色 */
+    color: var(--nav-text-color);
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #f5beb2;
+}
+
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .hero {
+        padding: 3rem 1.5rem;
+    }
+}
+
+/* ---------------------------------------
+  Gallery Section 
+  ------------------------------------*/
+.gallery {
+    margin-top: 4rem;
+}
+
+.gallery h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-emphasis-color);
+}
+
+/* CSS Grid Layout - 2 Column Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Gallery Item Styling */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* 文字信息区域 */
+.gallery-overlay {
+    padding: 1rem 1.2rem;
+    /* 上下 1rem，左右 1.2rem，给文字留出空间 */
+    background-color: #ecedf1;
+    /* 如果你需要截图里那种浅灰色背景，可以加这行 */
+}
+
+/* 优化标题间距，防止文字太挤 */
+.gallery-overlay h3 {
+    margin-bottom: 0.5rem;
+    /* 标题和下面文字稍微拉开点距离 */
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.gallery-overlay p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Responsive Gallery */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .gallery h2 {
+        font-size: 2rem;
+    }
+
+    .gallery-item img {
+        height: 250px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .gallery-grid {
+        gap: 1.5rem;
+    }
+}
+
+/*-----------------------------------
+Lab2
+-------------------------------------*/
+.lab-header {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background: var(--text-emphasis-color);
+    color: #efe8de;
+    border-radius: 0px;
+    margin-bottom: 3rem;
+}
+
+.lab-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #efe8de;
+}
+
+.lab-date {
+    font-size: 1.1rem;
+    color: #efe8de;
+    font-style: italic;
+}
+
+.lab-content {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+}
+
+.lab-content h2 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.learning-section {
+    background-color: #ecedf1;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.learning-section h3 {
+    color: var(--text-emphasis-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.learning-section ul {
+    margin-left: 2rem;
+    line-height: 1.8;
+}
+
+.learning-section li {
+    margin-bottom: 0.5rem;
+}
+
+/* Screenshot Gallery */
+.lab-images {
+    margin-bottom: 4rem;
+}
+
+.lab-images h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.screenshot-grid figure {
+    margin: 0;
+    background: #f8f9fa;
+    border: 1.5px solid #f8f9fa;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    /* 开启 Flex 布局 */
+    flex-direction: column;
+    /* 让内容垂直排列 */
+    height: 100%;
+    /* 确保卡片高度占满整个网格单元 */
+}
+
+.screenshot-grid figure:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.screenshot-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.screenshot-grid figcaption {
+    padding: 1rem;
+    text-align: center;
+    font-style: italic;
+    color: #7f8c8d;
+    background-color: #f8f9fa;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+/* Reflection Section */
+.lab-reflection {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ecedf1;
+    border-top: 4px solid #f5beb2;
+}
+
+.lab-reflection h2 {
+    color: var(--text-emphasis-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.lab-reflection p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.lab-reflection p:last-child {
     margin-bottom: 0;
 }
 
-h2 {
-    margin-top: 0
+/* -----------------------------
+   Back Navigation
+------------------------------- */
+.back-nav {
+    margin-top: 4rem;      /* 在文章和按钮之间留出大片空白 */
+    padding-top: 2rem;     /* 按钮内部上方的留白 */
+    border-top: 1px solid rgba(0,0,0,0.1); /* 加一条淡淡的分割线，更有结束感 */
 }
 
-a {
-    color: rgba(0, 240, 255, 0.4)
+.back-nav a {
+    text-decoration: none;
+    color: var(--text-emphasis-color);
+    font-weight: 600;
+    font-size: 1.1rem;      /* 文字大小 */
+    display: inline-flex;   /* 弹性布局，为了让箭头和文字垂直对齐 */
+    align-items: center;    /* 垂直居中 */
+    gap: 0.5rem;
+    transition: all 0.3s ease;
 }
 
-h1:hover {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+/* 专门控制箭头 */
+.back-nav .arrow {
+    font-size: 2rem;       /* 🔥 箭头放大！ (文字是 1.1rem，箭头是 2rem) */
+    line-height: 1;        /* 防止大箭头撑乱行高 */
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 加个弹跳动画 */
+    margin-bottom: 3px;    /* 微调：因为箭头变大了，稍微往上提一点视觉上才居中 */
+}
+
+/* 悬停效果 */
+.back-nav a:hover {
+    color: #f5beb2; /* 变粉色 */
+}
+
+.back-nav a:hover .arrow {
+    transform: translateX(-8px) scale(1.1); /* 箭头不但往左动，还稍微变大一点 */
+}
+
+/*====================================
+about page
+======================================*/
+/* 页面标题背景 (简单的纯色或渐变) */
+.page-header {
+    background-color: var(--text-emphasis-color);
+    /* 使用你的深色背景变量 */
+    color: var(--nav-text-color);
+    padding: 3rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #f5e1d6;
+    /* 使用粉色强调色 */
+}
+
+/* 通用段落样式 */
+.text-block {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    /* 底部留白 */
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.text-block p {
+    margin-bottom: 1.5rem;
+}
+
+/* ---------------------------
+   Goals Grid (三列卡片布局)
+--------------------------- */
+.goals-section {
+    margin-bottom: 4rem;
+}
+
+.goals-section h2,
+.skills-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-emphasis-color);
+    /* 紫色标题 */
+    border-bottom: 2px solid var(--nav-text-color);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+
+    /* 让标题居中 */
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.goals-grid {
+    display: grid;
+    /* 自动适应列宽，每列至少 250px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.goal-card {
+    background: #ecedf1;
+    /* 浅灰色背景 */
+    padding: 2rem;
+    border-left: 5px solid var(--text-emphasis-color);
+    /* 左侧加一条紫色装饰线 */
+    transition: transform 0.3s ease;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    /* 悬停浮动效果 */
+}
+
+.goal-card h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+/* ---------------------------
+   Skills Section (两栏布局)
+--------------------------- */
+.skills-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 左右两栏 */
+    gap: 4rem;
+    background-color: var(--nav-bg-color);
+    /* 深色背景块 */
+    padding: 3rem;
+    color: #efe8de;
+    /* 浅色文字 */
+}
+
+.skill-category h3 {
+    color: #f5beb2;
+    /* 粉色标题 */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.skill-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 列表内部也分两列 */
+    gap: 1rem;
+}
+
+.skill-list li {
+    display: flex;
+    align-items: center;
+}
+
+/* 在每个技能前面加一个小方块装饰 */
+.skill-list li::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #f5beb2;
+    margin-right: 10px;
+}
+
+/* ---------------------------
+   Responsive for About Page
+--------------------------- */
+@media (max-width: 768px) {
+    .skills-wrapper {
+        grid-template-columns: 1fr;
+        /* 手机上变成单列 */
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+}
+
+/* ----------------------------------
+ Footer Styling 
+ ------------------------------------*/
+footer {
+    background-color: #575c82;
+    color: #efe8de;
+    padding: 3rem 2rem 1rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    color: #f5beb2;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #efe8de;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #f5beb2;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(241, 236, 240, 0.1);
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: #a69595;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+
+    footer {
+        padding: 2rem 1rem 1rem;
+    }
 }
