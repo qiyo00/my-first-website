@@ -13,7 +13,6 @@
 </head>
 
 <body>
-    </header>
     <link rel="stylesheet" href="../style.css">
     <header>
         <nav>
@@ -80,17 +79,37 @@
 
         <section class="lab-reflection">
             <h2>Reflection</h2>
-            <p>Besides Flex box and CSS grid, I learned the difference between px and rem units: rem (Root em) is relative to the browser's default font size (usually 16px). Using rem instead of fixed pixels makes the website more accessible and responsive, as it scales automatically if a user adjusts their browser settings. I also learned how to use CSS variables (:root) to manage colors efficiently, making it much easier to "theme" my website later.
+            <p>Besides Flex box and CSS grid, I learned the difference between px and rem units: rem (Root em) is
+                relative to the browser's default font size (usually 16px). Using rem instead of fixed pixels makes the
+                website more accessible and responsive, as it scales automatically if a user adjusts their browser
+                settings. I also learned how to use CSS variables (:root) to manage colors efficiently, making it much
+                easier to "theme" my website later.
 
-<p>The hardest concept to visualize was the Parent-Child relationship in CSS layout, specifically regarding "Full Bleed" (full-width) designs. At first, I struggled to understand why my Hero image had white borders around it even though I set width: 100%. It was hard to visualize that because my main tag (the parent) had padding and max-width limitations, the hero section (the child) was trapped inside that "invisible cage." Understanding that I needed to physically move the code structure (taking the Hero section out of the main container) was challenging.</p>
+            <p>The hardest concept to visualize was the Parent-Child relationship in CSS layout, specifically regarding
+                "Full Bleed" (full-width) designs. At first, I struggled to understand why my Hero image had white
+                borders around it even though I set width: 100%. It was hard to visualize that because my main tag (the
+                parent) had padding and max-width limitations, the hero section (the child) was trapped inside that
+                "invisible cage." Understanding that I needed to physically move the code structure (taking the Hero
+                section out of the main container) was challenging.</p>
 
-The "Squished" Navbar Challenge: I faced a frustrating issue where my navigation bar collapsed into a tiny block in the center of the screen. I was surprised to learn that this was caused by setting display: grid and place-items: center on the <body>. It taught me that generic centering commands on the body affect everything, including elements like headers that are supposed to span the full width.
+            The "Squished" Navbar Challenge: I faced a frustrating issue where my navigation bar collapsed into a tiny
+            block in the center of the screen. I was surprised to learn that this was caused by setting display: grid
+            and place-items: center on the
 
-I also learned the "Container Strategy": allowing the main or body to be full-width (for things like the Hero image), but creating a separate internal div (like .content-container) to hold the text and gallery. This hybrid approach allows me to have both immersive full-screen images and readable, centered text on the same page.</p>
+            <body>. It taught me that generic centering commands on the body affect everything, including elements like
+                headers that are supposed to span the full width.
+
+                I also learned the "Container Strategy": allowing the main or body to be full-width (for things like the
+                Hero image), but creating a separate internal div (like .content-container) to hold the text and
+                gallery. This hybrid approach allows me to have both immersive full-screen images and readable, centered
+                text on the same page.</p>
         </section>
         <nav class="back-nav">
-            <a href="../index.html">
+            <a href="../index.html" class="pre">
                 <span class="arrow">&larr;</span> Back to Home
+            </a>
+            <a href="lab3.html" class="next">
+                Lab 3 <span class="arrow">&rarr;</span> 
             </a>
         </nav>
     </main>

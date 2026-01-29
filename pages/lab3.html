@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <title>Lab 3</title>
+</head>
+
+<body>
+    </header>
+    <link rel="stylesheet" href="../style.css">
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>
+                    <a href="../index.html">My DevDiaries</a>
+                </h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="labs.html" class="active">Labs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="lab-header">
+            <h1>Lab 3</h1>
+            <p class="lab-date">22/January/2026</p>
+        </section>
+
+        <section class="lab-content">
+            <h2>Reverse Storyboards</h2>
+        </section>
+
+        <section class="lab3-storyboards lab-images">
+            <div class="screenshot-grid">
+                <figure class="clickable-image">
+                    <img src="../images/lab3-1.JPG" alt="Storyboard 1" onclick="openModal(this.src)">
+                    <figcaption>Reverse Storyboard - Part 1</figcaption>
+                </figure>
+                <figure class="clickable-image">
+                    <img src="../images/lab3-2.JPG" alt="Storyboard 2" onclick="openModal(this.src)">
+                    <figcaption>Reverse Storyboard - Part 2</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <div id="imageModal" class="modal" onclick="closeModal()">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="fullImage">
+        </div>
+
+        <script>
+            function openModal(src) {
+                const modal = document.getElementById("imageModal");
+                const modalImg = document.getElementById("fullImage");
+                modal.style.display = "block";
+                modalImg.src = src;
+                document.body.style.overflow = "hidden"; // 放大时禁止页面滚动
+            }
+
+            function closeModal() {
+                document.getElementById("imageModal").style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+
+            // 按下 ESC 键关闭
+            document.addEventListener('keydown', function (e) {
+                if (e.key === "Escape") closeModal();
+            });
+        </script>
+
+
+        <section class="lab-reflection">
+            <h2>Reflection</h2>
+            <p>Partner's name: Ella</p>
+            <p>Q: What did your partner do differently from your storyboards?</p>
+            <p>Ella’s approach differs primarily in its technical density and the use of a formal annotation system. She has mapped out specific micro-interactions, such as screen flashes, smoke animations for Pokémon swaps, and the distinct movement of sprites sliding out of frame upon fainting. There’s a structured table beneath each frame to separate physical "Actions" from system "Interactions," providing a literal step-by-step guide for a developer.</p>
+            <p>Q: Did the differences enhance the storyboards, or make it more difficult to interpret the intended actions?</p>
+            <p>These differences enhance the storyboard by removing technical ambiguity. By explicitly labeling UI states and using a legend for symbols like text typing or pop animations, it ensures that the intended "game feel" is communicated alongside the mechanics.</p>
+            <p>Q: What, if anything, would you change about your storyboards considering the differences in your partner's work?</p>
+            <p>I could add a "notes" layer to define micro-moments like screen vibrations or transition effects. Incorporating a small legend or color-coding movement arrows would clarify the difference between player input and automated system feedback. </p>
+        </section>
+        <nav class="back-nav">
+            <a href="../index.html">
+                <span class="arrow">&larr;</span> Back to Home
+            </a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>My DevDiaries</h3>
+                <p>Documenting my journey in web development</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pages/about.html">About</a></li>
+                    <li><a href="pages/labs.html">Labs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: qingyue.guo@mail.utoronto.ca</p>
+                <p>Website: <a href="https://sites.google.com/view/qingyue-guo/portfolio">Go to my portfolio website</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 My DevDiaries by Qiyo. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

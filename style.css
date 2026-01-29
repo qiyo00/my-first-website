@@ -128,16 +128,16 @@ nav {
 }
 
 .logo h1 a:hover {
-/* 稍微把字往左上角提一点，制造悬浮感 */
+    /* 稍微把字往左上角提一点，制造悬浮感 */
     transform: translate(-2px, -2px);
-    
+
     /* 关键：不使用模糊(0px)，而是使用硬阴影 */
     /* 第一层阴影：右下角的紫色 */
     /* 第二层阴影：左上角的粉色 */
-    text-shadow: 
-        3px 3px 0px #575c82,  
-        -2px -2px 0px #fff; 
-        
+    text-shadow:
+        3px 3px 0px #575c82,
+        -2px -2px 0px #fff;
+
     /* 保持文字颜色深色，确保清晰度 */
     color: #3b3a36;
 }
@@ -413,6 +413,7 @@ Lab2
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 4rem;
 }
 
 .screenshot-grid figure {
@@ -452,6 +453,57 @@ Lab2
     font-size: 0.9rem;
 }
 
+/* --- 解决间距问题 --- */
+.lab3-storyboards {
+    margin-bottom: 5rem; /* 在 storyboard 和 reflection 之间增加大片空白 */
+    margin-top: 2rem;    /* 与上方文字的间距 */
+}
+
+/* --- 图片放大弹窗样式 --- */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000; /* 确保在最顶层 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    cursor: zoom-out;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 让鼠标悬停在缩略图上时显示放大镜 */
+.clickable-image img {
+    cursor: zoom-in;
+}
+
 /* Reflection Section */
 .lab-reflection {
     max-width: 800px;
@@ -480,38 +532,54 @@ Lab2
    Back Navigation
 ------------------------------- */
 .back-nav {
-    margin-top: 4rem;      /* 在文章和按钮之间留出大片空白 */
-    padding-top: 2rem;     /* 按钮内部上方的留白 */
-    border-top: 1px solid rgba(0,0,0,0.1); /* 加一条淡淡的分割线，更有结束感 */
+    margin-top: 4rem;
+    /* 在文章和按钮之间留出大片空白 */
+    padding-top: 2rem;
+    /* 按钮内部上方的留白 */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    /* 加一条淡淡的分割线，更有结束感 */
 }
 
 .back-nav a {
     text-decoration: none;
     color: var(--text-emphasis-color);
     font-weight: 600;
-    font-size: 1.1rem;      /* 文字大小 */
-    display: inline-flex;   /* 弹性布局，为了让箭头和文字垂直对齐 */
-    align-items: center;    /* 垂直居中 */
+    font-size: 1.1rem;
+    /* 文字大小 */
+    display: inline-flex;
+    /* 弹性布局，为了让箭头和文字垂直对齐 */
+    align-items: center;
+    /* 垂直居中 */
     gap: 0.5rem;
     transition: all 0.3s ease;
 }
 
 /* 专门控制箭头 */
 .back-nav .arrow {
-    font-size: 2rem;       /* 🔥 箭头放大！ (文字是 1.1rem，箭头是 2rem) */
-    line-height: 1;        /* 防止大箭头撑乱行高 */
+    font-size: 2rem;
+    /* 🔥 箭头放大！ (文字是 1.1rem，箭头是 2rem) */
+    line-height: 1;
+    /* 防止大箭头撑乱行高 */
     display: inline-block;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 加个弹跳动画 */
-    margin-bottom: 3px;    /* 微调：因为箭头变大了，稍微往上提一点视觉上才居中 */
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* 加个弹跳动画 */
+    margin-bottom: 3px;
+    /* 微调：因为箭头变大了，稍微往上提一点视觉上才居中 */
 }
 
 /* 悬停效果 */
 .back-nav a:hover {
-    color: #f5beb2; /* 变粉色 */
+    color: #f5beb2;
+    /* 变粉色 */
 }
 
-.back-nav a:hover .arrow {
-    transform: translateX(-8px) scale(1.1); /* 箭头不但往左动，还稍微变大一点 */
+.back-nav a.pre:hover .arrow {
+    transform: translateX(-8px) scale(1.1);
+}
+
+/* 右侧按钮：悬停时向右跳 */
+.back-nav a.next:hover .arrow {
+    transform: translateX(8px) scale(1.1);
 }
 
 /*====================================
