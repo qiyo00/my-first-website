@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <title>Lab 4 - Scrollytelling</title>
+</head>
+
+<body>
+    <link rel="stylesheet" href="../style.css">
+    <script src="script.js"></script>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>
+                    <a href="../index.html">My DevDiaries</a>
+                </h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="labs.html" class="active">Labs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="lab-header">
+            <h1>Lab 4 - Scrollytelling</h1>
+            <p class="lab-date">12/February/2026</p>
+        </section>
+
+        <section class="lab-content">
+            <h2>[Progress] Portrait with Brain <i>in situ</i></h2>
+        </section>
+
+        <section class="scrolly-container">
+            <!-- LEFT: visuals -->
+            <div class="visual-column">
+                <div class="visual" id="visual-1">
+                    <img src="../images/Portrait/sketch.png" alt="Step 1" />
+                </div>
+
+
+                <div class="visual" id="visual-2">
+                    <img src="../images/Portrait/process.png" alt="Step 2" />
+                </div>
+
+
+                <div class="visual" id="visual-3">
+                    <img src="../images/Portrait/rendering.png" alt="Step 3" />
+                </div>
+
+                <div class="visual active" id="visual-4">
+                    <img src="../images/Portrait/final.png" alt="Step 4" />
+                </div>
+            </div>
+
+
+            <!-- RIGHT: story text -->
+            <div class="text-column">
+                <section class="story-step" data-visual="1">
+                    <h2>Step 1: Initial Sketch</h2>
+                    <p>I started the draft using a perspective guide in Procreate.</p>
+                </section>
+
+
+                <section class="story-step" data-visual="2">
+                    <h2>Step 2: Refined Sketch</h2>
+                    <p>I blocked out forms with boxes and spheres first to ensure accurate proportions and perspectives
+                        before refining the anatomical details.</p>
+                </section>
+
+
+                <section class="story-step" data-visual="3">
+                    <h2>Step 3: Rendering</h2>
+                    <p>I’m aiming for the look of an old photograph to capture the feeling of memory.</p>
+                    <p>I started in greyscale first.</p>
+                </section>
+
+                <section class="story-step" data-visual="4">
+                    <h2>Step 4: Final</h2>
+                    <p>After finishing the grayscale, I used a Gradient Map in Photoshop to add color, then added
+                        further
+                        details to the brain and the portrait.</p>
+                </section>
+
+                <div class="spacer"></div>
+            </div>
+        </section>
+
+        <section class="lab-reflection">
+            <h2>Reflection</h2>
+            <p>Project Summary</p>
+            <p>For this lab, I developed a Scrollytelling experience, which documents my process of creating an
+                illustration. My goal was to create a narrative flow where the visual elements on the left side of the
+                screen sync with the storytelling text on the right.</p>
+            <p>Technical Reflection</p>
+            <p>The most significant challenge was finding a balance between visual aesthetics and performance. I
+                originally intended to use mix-blend-mode: multiply to integrate the images (with white backgrounds)
+                with the webpage background. However, during testing, I noticed that the blend mode caused a noticeable
+                lag whenever a new image was triggered. To prioritize a smooth, uninterrupted user experience, I decided
+                to remove the blend mode and stick with standard image rendering.</p>
+        </section>
+        <nav class="back-nav">
+            <a href="../index.html" class="pre">
+                <span class="arrow">&larr;</span> Back to Home
+            </a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>My DevDiaries</h3>
+                <p>Documenting my journey in web development</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="labs.html">Labs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: qingyue.guo@mail.utoronto.ca</p>
+                <p>Website: <a href="https://sites.google.com/view/qingyue-guo/portfolio">Go to my portfolio website</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 My DevDiaries by Qiyo. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

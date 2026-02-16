@@ -455,15 +455,18 @@ Lab2
 
 /* --- 解决间距问题 --- */
 .lab3-storyboards {
-    margin-bottom: 5rem; /* 在 storyboard 和 reflection 之间增加大片空白 */
-    margin-top: 2rem;    /* 与上方文字的间距 */
+    margin-bottom: 5rem;
+    /* 在 storyboard 和 reflection 之间增加大片空白 */
+    margin-top: 2rem;
+    /* 与上方文字的间距 */
 }
 
 /* --- 图片放大弹窗样式 --- */
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
-    z-index: 2000; /* 确保在最顶层 */
+    z-index: 2000;
+    /* 确保在最顶层 */
     left: 0;
     top: 0;
     width: 100%;
@@ -485,8 +488,15 @@ Lab2
 }
 
 @keyframes zoomIn {
-    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    from {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
 }
 
 .close {
@@ -727,6 +737,253 @@ about page
         font-size: 2rem;
     }
 }
+
+/*-----------------------------
+    tech ex page - flea interaction
+-------------------------------*/
+.flea-container {
+    position: relative;
+    width: 250px;
+    height: auto;
+    cursor: pointer;
+    /* 删掉之前的 margin-top: 100px 等数值 */
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 定义三个动画 */
+
+/* 睡觉：以底部为中心的呼吸感 */
+@keyframes subtleBreathing {
+
+    0%,
+    100% {
+        transform: scale(1, 1);
+    }
+
+    /* 吸气阶段：高度增至 1.03，宽度相应微缩至 0.985 以保持自然感 */
+    40% {
+        transform: scale(0.985, 1.03);
+    }
+}
+
+/* 起来：正常的中心观察感（微调旋转） */
+@keyframes alertLook {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    30% {
+        transform: rotate(1.5deg);
+    }
+
+    70% {
+        transform: rotate(-1.5deg);
+    }
+}
+
+/* 醒着：快速震动 */
+@keyframes livelyShiver {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(1px, -1px);
+    }
+
+    50% {
+        transform: translate(-1px, 1px);
+    }
+}
+
+/* 状态应用 */
+
+.flea-state {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+/* 睡觉：以底部为中心的微妙呼吸 */
+.state-sleep {
+    opacity: 1;
+    transform-origin: 50% 100%;
+    animation: subtleBreathing 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* 起来：以中心为基准观察 */
+.state-hover {
+    transform-origin: center center;
+    animation: alertLook 3s ease-in-out infinite;
+}
+
+/* 醒着：快速震动 */
+.state-awake {
+    transform-origin: center center;
+    animation: livelyShiver 0.1s infinite;
+}
+
+/* 5. 交互切换逻辑 */
+.flea-container:hover .state-sleep {
+    opacity: 0;
+}
+
+.flea-container:hover .state-hover {
+    opacity: 1;
+}
+
+.flea-container:active .state-sleep,
+.flea-container:active .state-hover {
+    opacity: 0;
+}
+
+.flea-container:active .state-awake {
+    opacity: 1;
+}
+
+
+.reflection-list {
+    padding-left: 25px;
+    /* 给左侧数字留出位置 */
+}
+
+.reflection-list li {
+    margin-bottom: 25px;
+    /* 每条内容之间空开，不拥挤 */
+}
+
+.reflection-list li strong {
+    display: block;
+    /* 让标题单独占一行 */
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+/* 内部的 Point 列表样式 */
+.point-list {
+    margin-top: 10px;
+    list-style-type: disc;
+    /* 圆点样式 */
+    padding-left: 20px;
+}
+
+/* =============================== 
+lab4 styling
+=================================*/
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+/* Main 2-column layout */
+.scrolly-container {
+    display: flex;
+    /* 左右并排 */
+    position: relative;
+    /* 给 sticky 提供定位基准 */
+    width: 100%;
+    clip-path: inset(0 0 0 0);
+    margin-bottom: 10vh;
+}
+
+/* 2. left (visuals) */
+.visual-column {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+    background: #ffffff;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     /* 确保视觉内容垂直水平居中 */
+}
+
+
+/* Right side (story) */
+.text-column {
+    margin-left: 50%;
+    width: 50%;
+    padding: 24px;
+}
+
+
+.step {
+    min-height: 80vh;
+    /* 每一段文字大约占大半屏 */
+    padding: 20px 0;
+}
+
+.visual-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Each visual sits on top of each other */
+.visual {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* The active one shows */
+.visual.active {
+    opacity: 1;
+}
+
+
+.visual img {
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain;
+}
+
+.story-step {
+    min-height: 90vh;
+    padding: 40px 0;
+}
+
+
+.story-step h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+
+.story-step p {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.story-step:last-of-type {
+    padding-bottom: 60vh; /* 这样即使文字完了，图片还能再留一会儿 */
+}
+
+.spacer {
+    height: 20vh;
+}
+
 
 /* ----------------------------------
  Footer Styling 
