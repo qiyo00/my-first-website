@@ -742,6 +742,7 @@ about page
     tech ex page - flea interaction
 -------------------------------*/
 .flea-container {
+    flex: 0 0 250px;
     position: relative;
     width: 250px;
     height: auto;
@@ -845,6 +846,114 @@ about page
     opacity: 1;
 }
 
+/* 1. 布局容器：让 SVG 和文字并排 */
+.tech-exp-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 整体水平居中 */
+    margin: 3rem auto;
+    max-width: 1000px;
+}
+
+/* 内层交互区：左图右文排列 */
+.flea-interaction-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+    /* 增加图片和文字之间的间隔 */
+    width: 100%;
+    margin-bottom: 2rem;
+    /* 给下方的 Ref 留一点空隙 */
+}
+
+/* 2. 文字说明容器样式 */
+.flea-instructions {
+    flex: 0 1 300px;
+    /* 限制说明文字的宽度，使其紧凑 */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.4;
+    /* 默认半透明 */
+    transition: all 0.3s ease;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--text-emphasis-color);
+}
+
+.flea-ref {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-style: italic;
+    text-align: center;
+    width: 100%;
+}
+
+/* 3. 交互联动逻辑 */
+
+/* 默认状态：Sleep 高亮 */
+.instruction-item.instr-sleep {
+    opacity: 1;
+}
+
+/* 当鼠标悬停容器时：Sleep 变淡，Hover 高亮 */
+.tech-exp-wrapper:hover .instr-sleep {
+    opacity: 0.4;
+}
+
+.tech-exp-wrapper:hover .instr-hover {
+    opacity: 1;
+    color: var(--text-emphasis-color);
+    transform: translateX(10px);
+}
+
+/* 当长按鼠标时：Hover 也变淡，Awake 高亮 */
+.tech-exp-wrapper:active .instr-hover {
+    opacity: 0.4;
+    transform: translateX(0);
+}
+
+.tech-exp-wrapper:active .instr-awake {
+    opacity: 1;
+    transform: translateX(10px);
+}
+
+/* 响应式：手机端改为上下排列 */
+@media (max-width: 768px) {
+    .tech-exp-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .flea-container {
+        width: 180px;
+        /* 移动端缩小一点 */
+    }
+
+    .flea-interaction-area {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .flea-instructions {
+        flex: 1;
+        width: 100%;
+        padding-left: 20%;
+        /* 手机端微调对齐 */
+    }
+}
 
 .reflection-list {
     padding-left: 25px;
@@ -910,7 +1019,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-     /* 确保视觉内容垂直水平居中 */
+    /* 确保视觉内容垂直水平居中 */
 }
 
 
@@ -977,7 +1086,8 @@ body {
 }
 
 .story-step:last-of-type {
-    padding-bottom: 60vh; /* 这样即使文字完了，图片还能再留一会儿 */
+    padding-bottom: 60vh;
+    /* 这样即使文字完了，图片还能再留一会儿 */
 }
 
 .spacer {
